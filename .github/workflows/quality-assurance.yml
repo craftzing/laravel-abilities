@@ -28,8 +28,6 @@ jobs:
 
       - name: Run tests
         run: vendor/bin/phpunit --coverage-clover=coverage.clover
-        with:
-          php_extensions: xdebug
 
       - name: Run tests & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
