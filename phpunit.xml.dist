@@ -3,14 +3,14 @@
          colors="true"
          bootstrap="vendor/autoload.php"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd">
+  <source>
+    <include>
+      <directory>src</directory>
+    </include>
+  </source>
   <testsuites>
     <testsuite name="laravel-abilities">
       <directory suffix="Test.php">tests/</directory>
     </testsuite>
   </testsuites>
-  <source>
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
-  </source>
 </phpunit>
