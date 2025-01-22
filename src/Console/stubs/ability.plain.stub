@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use Craftzing\Laravel\Abilities\Contracts\Ability;
+use Illuminate\Auth\Access\Response;
+use {{ namespacedUserModel }};
+
+class {{ class }} implements Ability
+{
+    /**
+     * Determine whether the ability is granted to the user.
+     */
+    public function granted({{ user }} $user): bool
+    {
+        return false;
+    }
+}
