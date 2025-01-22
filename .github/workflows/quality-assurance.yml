@@ -27,14 +27,14 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Run tests
-        run: vendor/bin/phpunit --coverage-clover=coverage.clover
+        run: vendor/bin/phpunit --debug --coverage-clover=coverage.clover
 
       - name: Run tests & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_TEST_REPORTER_ID }}
         with:
-          coverageCommand: vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
+          coverageCommand: vendor/bin/phpunit --debug --coverage-clover=coverage.clover
           coverageLocations: |
             ${{github.workspace}}/*.clover:clover
           debug: true
