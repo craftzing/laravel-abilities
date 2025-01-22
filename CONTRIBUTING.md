@@ -2,7 +2,7 @@ Contributing
 ===
 
 Contributions are welcome. If you want to ask or propose something, please 
-[create an issue](https://github.com/craftzing/:package_name/issues/new). If you want to contribute, please 
+[create an issue](https://github.com/craftzing/laravel-abilities/issues/new). If you want to contribute, please 
 send in a pull request.
 
 ## ⤴️ Pull requests
@@ -18,5 +18,16 @@ Make sure to follow these rules when creating a pull request:
 
 You can run the test suite with the following command:
 ```bash
-vendor/bin/phpunit
+composer phpunit
 ```
+
+## 🏅Quality assurance
+
+```bash
+composer cs:fix
+composer phpstan
+```
+
+## 📦 Laravel package development
+
+[Laravel documentation](https://laravel.com/docs/master/packages)
