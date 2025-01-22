@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
-use PhpCsFixerCustomFixers\Fixers;
 use Symfony\Component\Finder\Finder;
 
 $finder = Finder::create()
@@ -19,7 +18,6 @@ $finder = Finder::create()
 return (new Config())
     ->setParallelConfig(ParallelConfigFactory::detect())
     ->setRiskyAllowed(true)
-    ->registerCustomFixers(new Fixers())
     ->setRules([
         '@PHP84Migration' => true,
         'array_syntax' => ['syntax' => 'short'],
