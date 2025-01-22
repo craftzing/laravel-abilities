@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
-use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
-use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
 use PhpCsFixerCustomFixers\Fixers;
 use Symfony\Component\Finder\Finder;
 
@@ -56,9 +54,5 @@ return (new Config())
         ],
         'void_return' => true,
         'single_quote' => true,
-        MultilinePromotedPropertiesFixer::name() => [
-            'minimum_number_of_parameters' => 1,
-        ],
-        ConstructorEmptyBracesFixer::name() => true,
     ])
     ->setFinder($finder);
