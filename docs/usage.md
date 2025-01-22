@@ -2,7 +2,7 @@ Usage
 ===
 
 This section will guide you through the basic usage of this package. By the end of this section, you should be able to
-use your own abilities.
+create, use, and test your own abilities.
 
 ## Implementations
 
@@ -36,7 +36,9 @@ use Craftzing\Laravel\Abilities\Contracts\Ability;
 
 final readonly class ViewResource implements Ability
 {
-    public function __construct(private mixed $resource) {}
+    public function __construct(
+        private mixed $resource,
+    ) {}
     
     public function granted(mixed $user): bool
     {
@@ -102,9 +104,13 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use App\ViewResource;use Craftzing\Laravel\Abilities\Testing\Concerns\FakesAbilities;use Database\Factories\OrderFactory;use Database\Factories\UserFactory;use PHPUnit\Framework\Attributes\Test;
+use App\ViewResource;
+use Craftzing\Laravel\Abilities\Testing\Concerns\FakesAbilities;
+use Database\Factories\OrderFactory;
+use Database\Factories\UserFactory;
+use PHPUnit\Framework\Attributes\Test;
 
-final class ViewOrderRequestHandler extends TestCase
+final class ViewOrderRequestHandlerTest extends TestCase
 {
     use FakesAbilities;
     
@@ -134,6 +140,70 @@ final class ViewOrderRequestHandler extends TestCase
     }
 }
 ```
+
+## Make command
+
+Running:  
+
+```bash
+php artisan make:ability FooAbility
+```
+
+Will produce the following ability:  
+```php
+<?php
+
+namespace App\Abilities;
+
+use Craftzing\Laravel\Abilities\Contracts\Ability;
+use Illuminate\Auth\Access\Response;
+use App\Models\User
+
+class FooAbility implements Ability
+{
+    /**
+     * Determine whether the ability is granted to the user.
+     */
+    public function granted(User $user): bool
+    {
+        return false;
+    }
+}
+```
+
+Running:  
+
+```bash
+php artisan make:ability BarAbility --model=Post
+```
+
+Will produce the following ability:  
+
+```php
+<?php
+
+namespace App\Abilities;
+
+use Craftzing\Laravel\Abilities\Contracts\Ability;
+use Illuminate\Auth\Access\Response;
+use App\Models\User
+
+class BarAbility implements Ability
+{
+    public function __construct(
+        public Post $post,
+    ) {}
+    
+    /**
+     * Determine whether the ability is granted to the user.
+     */
+    public function granted(User $user): bool
+    {
+        return false;
+    }
+}
+```
+
 
 > 💡 Found an issue or is this section missing anything? Feel free to open a
 > [PR](https://github.com/craftzing/laravel-abilities/compare) or
