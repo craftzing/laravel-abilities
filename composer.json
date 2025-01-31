@@ -1,7 +1,7 @@
 {
     "name": "craftzing/laravel-abilities",
-    "description": "Bringing abilities functionality to Laravel",
-    "keywords": ["auth", "abilities", "laravel", "access-control", "acl"],
+    "description": "Improved class-based abilities for Laravel Gate",
+    "keywords": ["php", "laravel", "laravel-framework", "laravel-gate", "policies", "abilities"],
     "type": "library",
     "homepage": "https://github.com/craftzing/laravel-abilities",
     "support": {
@@ -10,6 +10,10 @@
     },
     "license": "MIT",
     "authors": [
+        {
+            "name": "Rémi Pelhate",
+            "email": "remi.pelhate@craftzing.com"
+        },
         {
             "name": "Pieter Pelgrims",
             "email": "pieter.pelgrims@craftzing.com"
