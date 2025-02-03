@@ -1,13 +1,10 @@
 Laravel Abilities
 ===
 
-![Quality assurance](https://github.com/craftzing/laravel-abilities/workflows/Quality%20assurance/badge.svg)
 ![Code style](https://github.com/craftzing/laravel-abilities/workflows/Code%20style/badge.svg)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/881eb71372c1b12c18d5/test_coverage)](https://codeclimate.com/github/craftzing/laravel-abilities/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/881eb71372c1b12c18d5/maintainability)](https://codeclimate.com/github/craftzing/laravel-abilities/maintainability)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&color=4D6CB8)](https://github.com/craftzing/laravel-abilities/blob/master/LICENSE)
 
-This package brings single class (abilities) access control to Laravel
+This package brings improved class-based abilities to Laravel
 
 ## Install
 
