@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Craftzing\Laravel\Tests\Abilities;
+namespace Craftzing\Laravel\Abilities;
 
 use Closure;
-use Craftzing\Laravel\Abilities\AuthoriseUsingAbilityInstance;
+use Craftzing\Laravel\Tests\Abilities\TestCase;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use PHPUnit\Framework\Attributes\Test;

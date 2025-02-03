@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Craftzing\Laravel\Tests\Abilities\Console;
+namespace Craftzing\Laravel\Abilities\Console;
 
 use Craftzing\Laravel\Tests\Abilities\TestCase;
 use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;

@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Craftzing\Laravel\Tests\Abilities;
+namespace Craftzing\Laravel\Abilities;
 
-use Craftzing\Laravel\Abilities\AuthoriseUsingAbilityInstance;
 use Craftzing\Laravel\Tests\Abilities\Doubles\SpyCallable;
+use Craftzing\Laravel\Tests\Abilities\SpyAbility;
+use Craftzing\Laravel\Tests\Abilities\TestCase;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Container\Container;
