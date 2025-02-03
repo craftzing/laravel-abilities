@@ -1,0 +1,11 @@
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: laravel-abilities
+    restart: unless-stopped
+    tty: true
+    working_dir: /code
+    volumes:
+      - ./:/code:delegated
