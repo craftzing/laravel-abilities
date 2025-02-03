@@ -3,4 +3,5 @@ parameters:
 	paths:
 		- src
 	excludePaths:
-		- src/Testing/Concerns/*
+		- ./*/*Test.php
+		- ./*/Testing/*
