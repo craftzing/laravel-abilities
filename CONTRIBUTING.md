@@ -28,6 +28,29 @@ composer cs:fix
 composer phpstan
 ```
 
+## 🛳️ Docker
+
+### Requirements
+- [Docker](https://docs.docker.com) ([Orbstack](https://orbstack.dev) for Mac users)
+- [Docker compose](https://docs.docker.com/compose)
+
+### Installation
+
+```shell
+make up
+```
+
+### Tests and quality assurance
+
+```shell
+make test
+```
+
+### Shutting down container
+```shell
+make down
+```
+
 ## 📦 Laravel package development
 
 [Laravel documentation](https://laravel.com/docs/master/packages)
