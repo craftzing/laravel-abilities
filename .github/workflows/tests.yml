@@ -1,5 +1,5 @@
 ---
-name: Quality assurance
+name: Tests
 on: [push, pull_request]
 
 jobs:
