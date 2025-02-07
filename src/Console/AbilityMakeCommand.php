@@ -48,9 +48,7 @@ class AbilityMakeCommand extends GeneratorCommand
      */
     protected function buildClass($name): string
     {
-        $stub = $this->replaceUserNamespace(
-            parent::buildClass($name),
-        );
+        $stub = $this->replaceUserNamespace(parent::buildClass($name));
 
         /** @var string $model */
         $model = $this->option('model');
@@ -66,11 +64,7 @@ class AbilityMakeCommand extends GeneratorCommand
             return $stub;
         }
 
-        return str_replace(
-            $this->rootNamespace() . 'User',
-            $model,
-            $stub,
-        );
+        return str_replace("{$this->rootNamespace()}User", $model, $stub);
     }
 
     /**
@@ -130,7 +124,7 @@ class AbilityMakeCommand extends GeneratorCommand
                 preg_quote($namespacedModel, '/'),
                 preg_quote($namespacedModel, '/'),
             ]),
-            "use {$namespacedModel};",
+            "use $namespacedModel;",
             $stub,
         );
     }

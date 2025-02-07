@@ -6,8 +6,9 @@ namespace Craftzing\Laravel\Abilities\Console;
 
 use Craftzing\Laravel\Abilities\Testing\TestCase;
 use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;
+use PHPUnit\Framework\Attributes\Test;
 
-class AbilityMakeCommandTest extends TestCase
+final class AbilityMakeCommandTest extends TestCase
 {
     use InteractsWithPublishedFiles;
 
@@ -18,7 +19,8 @@ class AbilityMakeCommandTest extends TestCase
         'app/Abilities/FooAbility.php',
     ];
 
-    public function testItCanGenerateAbilityFile(): void
+    #[Test]
+    public function itCanGenerateAbilityFile(): void
     {
         // @phpstan-ignore-next-line method.nonObject
         $this->artisan('make:ability', ['name' => 'FooAbility'])
@@ -32,7 +34,8 @@ class AbilityMakeCommandTest extends TestCase
         ], 'app/Abilities/FooAbility.php');
     }
 
-    public function testItCanGenerateAbilityFileWithModelOption(): void
+    #[Test]
+    public function itCanGenerateAbilityFileWithModelOption(): void
     {
         // @phpstan-ignore-next-line method.nonObject
         $this->artisan('make:ability', ['name' => 'FooAbility', '--model' => 'Post'])
