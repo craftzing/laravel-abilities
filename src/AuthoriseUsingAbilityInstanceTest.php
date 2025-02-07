@@ -4,55 +4,68 @@ declare(strict_types=1);
 
 namespace Craftzing\Laravel\Abilities;
 
-use Craftzing\Laravel\Tests\Abilities\Doubles\SpyCallable;
-use Craftzing\Laravel\Tests\Abilities\SpyAbility;
-use Craftzing\Laravel\Tests\Abilities\TestCase;
+use Craftzing\Laravel\Abilities\Testing\Doubles\FakeAbility;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Auth\GenericUser;
-use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\Container;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-
-use function fake;
+use PHPUnit\Framework\TestCase;
 
 final class AuthoriseUsingAbilityInstanceTest extends TestCase
 {
-
     #[Test]
-    public function itCanResolveAbilitiesWithoutHavingToDefineThem(): void
+    public function itShouldIgnoreAbilitiesThatAreNotAnInstance(): void
     {
         $user = new GenericUser(['id' => 1]);
-        $allowed = fake()->boolean();
-        $spyAbility = SpyAbility::authorise($allowed);
-        $gate = $this->getBasicGate();
+        $gate = $this->fakeGate();
+        $instance = new AuthoriseUsingAbilityInstance($gate);
 
-        $result = (new AuthoriseUsingAbilityInstance($gate))($user, $spyAbility);
+        $result = $instance($user, 'non-instance-ability');
 
-        $this->assertSame($allowed, $result);
-        $spyAbility->granted->assertWasCalledOnceWithArguments($user);
+        $this->assertNull($result);
+    }
+
+    /**
+     * @return iterable<array<bool>>
+     */
+    public static function authorize(): iterable
+    {
+        yield 'Allowed' => [true];
+        yield 'Denied' => [false];
     }
 
     #[Test]
-    public function itCanResolveAbilitiesThatAreExplicitlyDefined(): void
+    #[DataProvider('authorize')]
+    public function itCanAuthorizeAbilitiesNotDefinedInGate(bool $allowed): void
     {
+        $gate = $this->fakeGate();
         $user = new GenericUser(['id' => 1]);
-        $allowed = fake()->boolean();
-        $spyAbility = SpyAbility::authorise($allowed);
-        $spyResolver = new SpyCallable($allowed);
-        $gate = $this->getBasicGate();
-        $gate = $gate->define($spyAbility::class, $spyResolver(...));
+        $ability = FakeAbility::authorizeIf($allowed, $user);
+        $instance = new AuthoriseUsingAbilityInstance($gate);
 
-        $result = (new AuthoriseUsingAbilityInstance($gate))($user, $spyAbility);
+        $result = $instance($user, $ability);
 
         $this->assertSame($allowed, $result);
-        $spyAbility->granted->assertWasNotCalled();
-        $spyResolver->assertWasCalledOnceWithArguments($user, $spyAbility);
     }
 
-    protected function getBasicGate(bool $isAdmin = false): Gate
+    #[Test]
+    #[DataProvider('authorize')]
+    public function itCanAuthorizeAbilitiesExplicitlyDefinedInGate(bool $allowed): void
     {
-        return new Gate(
-            new Container(),
-            fn (): object => (object) ['id' => 1, 'isAdmin' => $isAdmin],
-        );
+        $gate = $this->fakeGate();
+        $user = new GenericUser(['id' => 1]);
+        $ability = FakeAbility::authorizeIf($allowed, $user);
+        $gate = $gate->define($ability::class, $ability->granted(...));
+        $instance = new AuthoriseUsingAbilityInstance($gate);
+
+        $result = $instance($user, $ability);
+
+        $this->assertSame($allowed, $result);
+    }
+
+    private function fakeGate(): Gate
+    {
+        return new Gate($this->createMock(Container::class), fn () => null);
     }
 }
