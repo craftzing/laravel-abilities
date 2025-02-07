@@ -5,7 +5,7 @@ Laravel Abilities
 [![Code style](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&color=4D6CB8)](https://github.com/craftzing/laravel-abilities/blob/master/LICENSE)
 
-This package brings improved class-based abilities to Laravel
+This package brings improved class-based abilities to Laravel.
 
 ## Install
 
@@ -15,8 +15,8 @@ composer require craftzing/laravel-abilities
 
 ## 🔥 Features
 
-- **Automatic** evaluation of ability based classes.
-- Easily create abilities on the fy with the **make** (`php artisan make:ability`) command.
+- **Automatic** evaluation of ability based classes (no need to define abilities in Gate).
+- Easily create abilities with Artisan.
 - Testing concern to **fake** abilities.
 
 ## 📚 Docs
