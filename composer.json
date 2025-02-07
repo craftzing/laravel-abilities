@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "8.3.*|8.4.*",
         "illuminate/auth": "^10.10.0|^11.0",
         "illuminate/contracts": "^10.10.0|^11.0",
         "illuminate/support": "^10.0|^11.0"
@@ -52,7 +52,12 @@
         "cs:check": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --verbose --dry-run",
         "cs:fix": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --verbose",
         "phpstan": "vendor/bin/phpstan analyse --memory-limit=2G --ansi",
-        "phpunit": "vendor/bin/phpunit --colors=always --display-phpunit-deprecations --display-deprecations"
+        "phpunit": "vendor/bin/phpunit --colors=always --display-phpunit-deprecations --display-deprecations",
+        "test": [
+            "@composer cs:check",
+            "@composer phpstan",
+            "@composer phpunit"
+        ]
     },
     "extra": {
         "branch-alias": {
