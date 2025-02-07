@@ -3,9 +3,14 @@
          colors="true"
          bootstrap="vendor/autoload.php"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd">
+  <coverage includeUncoveredFiles="true">
+    <report>
+      <clover outputFile="clover.xml" />
+    </report>
+  </coverage>
   <source>
     <include>
-      <directory>src</directory>
+      <directory suffix=".php">src</directory>
     </include>
   </source>
   <testsuites>

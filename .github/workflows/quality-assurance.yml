@@ -27,7 +27,7 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Run tests
-        run: vendor/bin/phpunit --coverage-clover=coverage.clover
+        run: composer test:coverage
 
       - name: Run PHPStan analysis
         run: vendor/bin/phpstan analyse --memory-limit=-1

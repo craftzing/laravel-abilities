@@ -52,7 +52,8 @@
             "@composer cs:check",
             "@composer phpstan",
             "@composer phpunit"
-        ]
+        ],
+        "test:coverage": "@composer phpunit -- --coverage-text"
     },
     "extra": {
         "branch-alias": {
