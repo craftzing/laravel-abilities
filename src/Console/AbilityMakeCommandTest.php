@@ -20,6 +20,7 @@ class AbilityMakeCommandTest extends TestCase
 
     public function testItCanGenerateAbilityFile(): void
     {
+        // @phpstan-ignore-next-line method.nonObject
         $this->artisan('make:ability', ['name' => 'FooAbility'])
             ->assertExitCode(0);
 
@@ -33,6 +34,7 @@ class AbilityMakeCommandTest extends TestCase
 
     public function testItCanGenerateAbilityFileWithModelOption(): void
     {
+        // @phpstan-ignore-next-line method.nonObject
         $this->artisan('make:ability', ['name' => 'FooAbility', '--model' => 'Post'])
             ->assertExitCode(0);
 

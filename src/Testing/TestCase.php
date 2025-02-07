@@ -18,4 +18,14 @@ abstract class TestCase extends BaseTestCase
             ServiceProvider::class,
         ];
     }
+
+    /**
+     * @template TReturn of mixed
+     * @param class-string<TReturn> $fqcn
+     * @return TReturn
+     */
+    protected function make(string $fqcn): mixed
+    {
+        return $this->app?->make($fqcn);
+    }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Craftzing\Laravel\Abilities\Console;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Str;
 use LogicException;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -28,31 +29,22 @@ use function vsprintf;
 class AbilityMakeCommand extends GeneratorCommand
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'make:ability';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $description = 'Create a new ability class';
 
     /**
-     * The type of class being generated.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $type = 'Ability';
 
     /**
-     * Build the class with the given name.
-     *
-     * @param string $name
-     * @return string
+     * {@inheritdoc}
      */
     protected function buildClass($name): string
     {
@@ -60,18 +52,13 @@ class AbilityMakeCommand extends GeneratorCommand
             parent::buildClass($name),
         );
 
+        /** @var string $model */
         $model = $this->option('model');
 
         return $model ? $this->replaceModel($stub, $model) : $stub;
     }
 
-    /**
-     * Replace the User model namespace.
-     *
-     * @param string $stub
-     * @return string
-     */
-    protected function replaceUserNamespace($stub): string
+    private function replaceUserNamespace(string $stub): string
     {
         $model = $this->userProviderModel();
 
@@ -87,39 +74,26 @@ class AbilityMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get the model for the guard's user provider.
-     *
-     * @return string|null
-     *
-     * @throws \LogicException
+     * {@inheritdoc}
      */
     protected function userProviderModel(): ?string
     {
-        $config = $this->laravel['config'];
-
+        /** @var Repository $config */
+        $config = $this->laravel->make(Repository::class);
         $guard = $this->option('guard') ?: $config->get('auth.defaults.guard');
 
-        if (is_null($guardProvider = $config->get('auth.guards.' . $guard . '.provider'))) {
-            throw new LogicException('The [' . $guard . '] guard is not defined in your "auth" configuration file.');
+        if (is_null($guardProvider = $config->get("auth.guards.$guard.provider"))) {
+            throw new LogicException("The [$guard] guard is not defined in your \"auth\" configuration file.");
         }
 
-        if (! $config->get('auth.providers.' . $guardProvider . '.model')) {
+        if (! $config->get("auth.providers.$guardProvider.model")) {
             return 'App\\Models\\User';
         }
 
-        return $config->get(
-            'auth.providers.' . $guardProvider . '.model',
-        );
+        return $config->get("auth.providers.$guardProvider.model");
     }
 
-    /**
-     * Replace the model for the given stub.
-     *
-     * @param string $stub
-     * @param string $model
-     * @return string
-     */
-    protected function replaceModel($stub, $model): string
+    protected function replaceModel(string $stub, string $model): string
     {
         $model = str_replace('/', '\\', $model);
 
@@ -130,9 +104,7 @@ class AbilityMakeCommand extends GeneratorCommand
         }
 
         $model = class_basename(trim($model, '\\'));
-
-        $dummyUser = class_basename($this->userProviderModel());
-
+        $dummyUser = class_basename($this->userProviderModel() ?: '');
         $dummyModel = Str::camel($model) === 'user' ? 'model' : $model;
 
         $replace = [
@@ -153,7 +125,7 @@ class AbilityMakeCommand extends GeneratorCommand
             $stub,
         );
 
-        return preg_replace(
+        return (string) preg_replace(
             vsprintf('/use %s;[\r\n]+use %s;/', [
                 preg_quote($namespacedModel, '/'),
                 preg_quote($namespacedModel, '/'),
@@ -163,11 +135,6 @@ class AbilityMakeCommand extends GeneratorCommand
         );
     }
 
-    /**
-     * Get the stub file for the generator.
-     *
-     * @return string
-     */
     protected function getStub(): string
     {
         return $this->option('model')
@@ -175,12 +142,6 @@ class AbilityMakeCommand extends GeneratorCommand
             : $this->resolveStubPath('/stubs/ability.plain.stub');
     }
 
-    /**
-     * Resolve the fully-qualified path to the stub.
-     *
-     * @param string $stub
-     * @return string
-     */
     protected function resolveStubPath(string $stub): string
     {
         return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
@@ -189,20 +150,15 @@ class AbilityMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace
-     * @return string
+     * {@inheritdoc}
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace . '\Abilities';
+        return "$rootNamespace\Abilities";
     }
 
     /**
-     * Get the console command arguments.
-     *
-     * @return array<int, mixed>
+     * @return array<int, array<int|string>>
      */
     protected function getOptions(): array
     {
@@ -214,11 +170,7 @@ class AbilityMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Interact further with the user if they were prompted for missing arguments.
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return void
+     * {@inheritdoc}
      */
     protected function afterPromptingForMissingArguments(InputInterface $input, OutputInterface $output): void
     {
@@ -226,10 +178,7 @@ class AbilityMakeCommand extends GeneratorCommand
             return;
         }
 
-        $model = suggest(
-            'What model should this ability apply to? (Optional)',
-            $this->possibleModels(),
-        );
+        $model = suggest('What model should this ability apply to? (Optional)', $this->possibleModels());
 
         if ($model) {
             $input->setOption('model', $model);
