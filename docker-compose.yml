@@ -1,9 +1,20 @@
 services:
-  workspace:
+  php83:
     build:
       context: .
-      dockerfile: docker/Dockerfile
-    container_name: laravel-abilities
+      dockerfile: docker/php83/Dockerfile
+    container_name: laravel-abilities.craftzing.php83
+    restart: unless-stopped
+    tty: true
+    working_dir: /code
+    volumes:
+      - ./:/code:delegated
+
+  php84:
+    build:
+      context: .
+      dockerfile: docker/php84/Dockerfile
+    container_name: laravel-abilities.craftzing.php84
     restart: unless-stopped
     tty: true
     working_dir: /code
