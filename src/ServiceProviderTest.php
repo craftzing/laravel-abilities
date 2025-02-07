@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Craftzing\Laravel\Abilities;
 
 use Closure;
-use Craftzing\Laravel\Tests\Abilities\TestCase;
+use Craftzing\Laravel\Abilities\Testing\TestCase;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use PHPUnit\Framework\Attributes\Test;

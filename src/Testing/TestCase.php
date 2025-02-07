@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Craftzing\Laravel\Tests\Abilities;
+namespace Craftzing\Laravel\Abilities\Testing;
 
 use Craftzing\Laravel\Abilities\ServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;

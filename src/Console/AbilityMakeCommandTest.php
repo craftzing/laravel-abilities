@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Craftzing\Laravel\Abilities\Console;
 
-use Craftzing\Laravel\Tests\Abilities\TestCase;
+use Craftzing\Laravel\Abilities\Testing\TestCase;
 use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;
 
 class AbilityMakeCommandTest extends TestCase

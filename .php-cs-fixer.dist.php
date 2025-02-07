@@ -7,10 +7,7 @@ use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 use Symfony\Component\Finder\Finder;
 
 $finder = Finder::create()
-    ->in([
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
-    ])
+    ->in([__DIR__ . '/src'])
     ->name('*.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);

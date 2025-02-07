@@ -38,11 +38,6 @@
             "Craftzing\\Laravel\\Abilities\\": "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Craftzing\\Laravel\\Tests\\Abilities\\": "tests"
-        }
-    },
     "config": {
         "sort-packages": true
     },
