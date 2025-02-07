@@ -17,7 +17,6 @@ composer require craftzing/laravel-abilities
 
 - **Automatic** evaluation of ability based classes (no need to define abilities in Gate).
 - Easily create abilities with Artisan.
-- Testing concern to **fake** abilities.
 
 ## 📚 Docs
 
