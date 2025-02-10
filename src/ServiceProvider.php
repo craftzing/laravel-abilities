@@ -12,7 +12,9 @@ final class ServiceProvider extends IlluminateServiceProvider
 {
     public function boot(Gate $gate): void
     {
-        $gate->before(new AuthoriseUsingAbilityInstance($gate));
+        if (AuthoriseUsingAbilities::$autoApplyToGate === true) {
+            $gate->before(new AuthoriseUsingAbilities($gate));
+        }
 
         $this->registerCommands();
     }

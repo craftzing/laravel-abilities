@@ -12,14 +12,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-final class AuthoriseUsingAbilityInstanceTest extends TestCase
+final class AuthoriseUsingAbilitiesTest extends TestCase
 {
     #[Test]
     public function itShouldIgnoreAbilitiesThatAreNotAnInstance(): void
     {
         $user = new GenericUser(['id' => 1]);
         $gate = $this->fakeGate();
-        $instance = new AuthoriseUsingAbilityInstance($gate);
+        $instance = new AuthoriseUsingAbilities($gate);
 
         $result = $instance($user, 'non-instance-ability');
 
@@ -42,7 +42,7 @@ final class AuthoriseUsingAbilityInstanceTest extends TestCase
         $gate = $this->fakeGate();
         $user = new GenericUser(['id' => 1]);
         $ability = FakeAbility::authorizeIf($allowed, $user);
-        $instance = new AuthoriseUsingAbilityInstance($gate);
+        $instance = new AuthoriseUsingAbilities($gate);
 
         $result = $instance($user, $ability);
 
@@ -57,7 +57,7 @@ final class AuthoriseUsingAbilityInstanceTest extends TestCase
         $user = new GenericUser(['id' => 1]);
         $ability = FakeAbility::authorizeIf($allowed, $user);
         $gate = $gate->define($ability::class, $ability->granted(...));
-        $instance = new AuthoriseUsingAbilityInstance($gate);
+        $instance = new AuthoriseUsingAbilities($gate);
 
         $result = $instance($user, $ability);
 

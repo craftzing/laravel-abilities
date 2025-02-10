@@ -15,6 +15,8 @@
     </include>
     <exclude>
       <directory suffix="Test.php">src</directory>
+      <directory>src/Testing</directory>
+      <!-- The make command is not part of code that will actually run in projects, it's merely a dev tool -->
       <directory suffix="AbilityMakeCommand.php">src</directory>
     </exclude>
   </source>

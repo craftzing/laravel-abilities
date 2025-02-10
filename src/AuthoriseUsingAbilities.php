@@ -9,10 +9,12 @@ use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Authenticatable;
 
-final readonly class AuthoriseUsingAbilityInstance
+final class AuthoriseUsingAbilities
 {
+    public static bool $autoApplyToGate = true;
+
     public function __construct(
-        private Gate $gate,
+        private readonly Gate $gate,
     ) {}
 
     /**
@@ -35,5 +37,10 @@ final readonly class AuthoriseUsingAbilityInstance
 
         // When the ability class in not defined in the gate, we should resolve it on the fly...
         return $ability->granted($user);
+    }
+
+    public static function dontAutoApplyToGate(): void
+    {
+        self::$autoApplyToGate = false;
     }
 }
