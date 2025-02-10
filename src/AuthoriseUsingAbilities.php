@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Authenticatable;
 
-final readonly class AuthoriseUsingAbilityInstance
+final readonly class AuthoriseUsingAbilities
 {
     public function __construct(
         private Gate $gate,

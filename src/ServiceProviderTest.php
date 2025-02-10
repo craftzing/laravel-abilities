@@ -19,7 +19,7 @@ final class ServiceProviderTest extends TestCase
         $gate = $this->make(GateContract::class);
 
         $expectedBeforeCallbacks = [
-            new AuthoriseUsingAbilityInstance($gate),
+            new AuthoriseUsingAbilities($gate),
         ];
 
         Closure::bind(function (Gate $gate, array $expectedBeforeCallbacks): void {
