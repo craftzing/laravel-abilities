@@ -16,3 +16,9 @@ php83: ## Open an interactive shell into the `php83` (service in docker-compose.
 php84: ## Open an interactive shell into the `php84` (service in docker-compose.yml)
 	docker compose up -d
 	docker compose exec php84 sh
+
+.PHONY: ci
+ci: ## Run all checks against all supported php versions
+	docker compose up -d
+	docker compose exec php84 composer ci
+	docker compose exec php83 composer ci
