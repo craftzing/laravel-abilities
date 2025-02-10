@@ -4,26 +4,57 @@ declare(strict_types=1);
 
 namespace Craftzing\Laravel\Abilities;
 
-use Closure;
 use Craftzing\Laravel\Abilities\Testing\TestCase;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\Test;
 
 final class ServiceProviderTest extends TestCase
 {
-    #[Test]
-    public function itShouldRegisterBeforeCallbacksOnGate(): void
+    protected function getPackageProviders($app): array
     {
-        $gate = $this->make(GateContract::class);
+        // We should remove the package provider in order to test its
+        // effect when registered with different configurations...
+        return [];
+    }
 
-        $expectedBeforeCallbacks = [
-            new AuthoriseUsingAbilities($gate),
-        ];
+    #[Test]
+    public function itShouldApplyAuthoriseUsingAbilitiesToGate(): void
+    {
+        $gate = $this->gate();
+        $this->swap(GateContract::class, $gate);
 
-        Closure::bind(function (Gate $gate, array $expectedBeforeCallbacks): void {
-            Assert::assertEquals($expectedBeforeCallbacks, $gate->beforeCallbacks);
-        }, null, Gate::class)($gate, $expectedBeforeCallbacks); // @phpstan-ignore-line argument.type
+        $this->app?->register(ServiceProvider::class);
+
+        // @phpstan-ignore method.notFound
+        $this->assertContainsEquals(new AuthoriseUsingAbilities($gate), $gate->beforeCallbacks());
+    }
+
+    #[Test]
+    public function itShouldNotApplyAuthoriseUsingAbilitiesToGateWhenDisabled(): void
+    {
+        AuthoriseUsingAbilities::dontAutoApplyToGate();
+        $gate = $this->gate();
+        $this->swap(GateContract::class, $gate);
+
+        $this->app?->register(ServiceProvider::class);
+
+        // @phpstan-ignore method.notFound
+        $this->assertEmpty($gate->beforeCallbacks());
+    }
+
+    private function gate(): Gate
+    {
+        // @phpstan-ignore argument.type
+        return new class($this->app, fn () => null) extends Gate
+        {
+            /**
+             * @return callable[]
+             */
+            public function beforeCallbacks(): array
+            {
+                return $this->beforeCallbacks;
+            }
+        };
     }
 }
