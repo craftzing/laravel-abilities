@@ -2,7 +2,7 @@ Laravel Abilities
 ===
 
 [![tests](https://github.com/craftzing/laravel-abilities/actions/workflows/tests.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/tests.yml)
-[![code style](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml)
+[![static-analysis](https://github.com/craftzing/laravel-abilities/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/static-analysis.yml)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&color=4D6CB8)](https://github.com/craftzing/laravel-abilities/blob/master/LICENSE)
 
 Laravel offers loads of fantastic ways to handle authorization, all of which rely on arguments to be passed dynamically
