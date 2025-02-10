@@ -1,5 +1,5 @@
 ---
-name: Quality assurance
+name: Tests
 on: [push, pull_request]
 
 jobs:
@@ -27,8 +27,4 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Run tests
-        run: vendor/bin/phpunit --coverage-clover=coverage.clover
-
-      - name: Run PHPStan analysis
-        run: vendor/bin/phpstan analyse --memory-limit=-1
-        if: ${{ matrix.php == '8.3' }}
+        run: composer test:coverage

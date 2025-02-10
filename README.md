@@ -1,9 +1,9 @@
 Laravel Abilities
 ===
 
-[![Quality assurance](https://github.com/craftzing/laravel-abilities/actions/workflows/quality-assurance.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/quality-assurance.yml)
-[![Code style](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&color=4D6CB8)](https://github.com/craftzing/laravel-abilities/blob/master/LICENSE)
+[![tests](https://github.com/craftzing/laravel-abilities/actions/workflows/tests.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/tests.yml)
+[![code style](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/code-style.yml)
+[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&color=4D6CB8)](https://github.com/craftzing/laravel-abilities/blob/master/LICENSE)
 
 This package brings improved class-based abilities to Laravel.
 

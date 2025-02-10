@@ -3,6 +3,24 @@ name: Code style
 on: [push]
 
 jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+
+      - name: Install dependencies
+        run: |
+          composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
+
+      - name: Run PHPStan analysis
+        run: composer phpstan
+
   php-cs-fixer:
     runs-on: ubuntu-latest
     steps:
