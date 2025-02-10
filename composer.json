@@ -48,12 +48,15 @@
         "cs:fix": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --verbose",
         "phpstan": "vendor/bin/phpstan analyse --memory-limit=2G --ansi",
         "phpunit": "vendor/bin/phpunit --colors=always --display-phpunit-deprecations --display-deprecations",
-        "test": [
+        "static-analysis": [
             "@composer cs:check",
-            "@composer phpstan",
-            "@composer phpunit"
+            "@composer phpstan"
         ],
-        "test:coverage": "@composer phpunit -- --coverage-text"
+        "test:coverage": "@composer phpunit -- --coverage-text",
+        "ci": [
+            "@composer test:coverage",
+            "composer static-analysis"
+        ]
     },
     "extra": {
         "branch-alias": {
