@@ -1,5 +1,5 @@
-Laravel Abilities
-===
+![Laravel Abilities banner](/art/banner-light.jpg#gh-light-mode-only)
+![Laravel Abilities banner](/art/banner-dark.jpg#gh-dark-mode-only)
 
 [![tests](https://github.com/craftzing/laravel-abilities/actions/workflows/tests.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/tests.yml)
 [![static-analysis](https://github.com/craftzing/laravel-abilities/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/craftzing/laravel-abilities/actions/workflows/static-analysis.yml)
