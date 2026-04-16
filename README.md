@@ -30,6 +30,7 @@ $user->can([new UpdatePostAbility($post)]);
 
 This package requires:
 - [PHP](https://www.php.net/supported-versions.php) 8.3
+- [Laravel](https://laravel.com/docs/releases) 12
 
 You can install this package using [Composer](https://getcomposer.org) by running the following command:
 ```shell
