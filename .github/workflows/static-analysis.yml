@@ -5,8 +5,8 @@ jobs:
   phpstan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # https://github.com/actions/checkout/releases/tag/v6.0.2
+      - uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # https://github.com/shivammathur/setup-php/releases/tag/2.37.1
         with:
           php-version: 8.3
       - run: composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
@@ -15,7 +15,7 @@ jobs:
   php-cs-fixer:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # https://github.com/actions/checkout/releases/tag/v6.0.2
         with:
           ref: ${{ github.head_ref }}
       - name: Run PHP CS fixer
@@ -23,6 +23,6 @@ jobs:
         with:
           args: --config=.php-cs-fixer.dist.php --allow-risky=yes
       - name: Commit CS fixes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # https://github.com/stefanzweifel/git-auto-commit-action/releases/tag/v7.1.0
         with:
           commit_message: Fix code style violations
