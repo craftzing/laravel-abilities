@@ -1,7 +1,7 @@
 .PHONY: up
 up: ## Up the project using Docker Composer
 	docker compose up --detach
-	docker compose exec php84 composer install
+	docker compose exec php85 composer install
 
 .PHONY: down
 down: ## Shutdown the project using Docker Composer
@@ -16,6 +16,11 @@ php83: ## Open an interactive shell into the `php83` (service in docker-compose.
 php84: ## Open an interactive shell into the `php84` (service in docker-compose.yml)
 	docker compose up -d
 	docker compose exec php84 sh
+
+.PHONY: php85
+php85: ## Open an interactive shell into the `php84` (service in docker-compose.yml)
+	docker compose up -d
+	docker compose exec php85 sh
 
 .PHONY: ci
 ci: ## Run all checks against all supported php versions
